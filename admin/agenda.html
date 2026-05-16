@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agenda | Terapia Cristã</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="admin.css">
+<link rel="icon" href="../assets/img/logo.png">
+</head>
+<body class="admin-body">
+<template id="pageContent">
+  <div class="panel">
+    <div class="panel-head">
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <button class="btn btn-ghost btn-sm" id="btnHoje">Hoje</button>
+        <button class="btn btn-ghost btn-sm" id="btnAnt">‹</button>
+        <input type="date" id="dataAtual" class="tc-field" style="padding:8px 14px;border:1.5px solid var(--cinza-300);border-radius:14px">
+        <button class="btn btn-ghost btn-sm" id="btnProx">›</button>
+      </div>
+      <button class="btn btn-primary" id="btnNovaSessao">+ Nova Sessão</button>
+    </div>
+
+    <div id="agendaDia" class="agenda-grid"></div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h3>📅 Resumo do Mês</h3></div>
+    <div id="resumoMes" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px"></div>
+  </div>
+</template>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/supabase-client.js"></script>
+<script src="../assets/js/ui.js"></script>
+<script src="shell.js"></script>
+<script src="agenda.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Configurações | Terapia Cristã</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="admin.css">
+<link rel="icon" href="../assets/img/logo.png">
+</head>
+<body class="admin-body">
+<template id="pageContent">
+  <div class="tc-tabs">
+    <button class="tc-tab active" data-tab="clinica">🏥 Clínica</button>
+    <button class="tc-tab" data-tab="whats">💬 Mensagens</button>
+    <button class="tc-tab" data-tab="conta">🔐 Conta</button>
+  </div>
+
+  <div class="tc-tab-content active" data-content="clinica">
+    <div class="panel">
+      <h3>Informações da Clínica</h3>
+      <form id="formClinica" class="tc-form">
+        <div class="tc-form-row">
+          <div class="tc-field"><label>Nome da clínica</label><input name="clinica_nome"></div>
+          <div class="tc-field"><label>Nome do terapeuta</label><input name="terapeuta_nome"></div>
+        </div>
+        <div class="tc-form-row">
+          <div class="tc-field"><label>WhatsApp (com DDI 55)</label><input name="whatsapp" placeholder="5512996184359"></div>
+          <div class="tc-field"><label>E-mail</label><input name="email" type="email"></div>
+        </div>
+        <div class="tc-field"><label>Endereço</label><input name="endereco"></div>
+        <div class="tc-field"><label>Horário de funcionamento</label><input name="horario_funcionamento"></div>
+        <div class="tc-form-row">
+          <div class="tc-field"><label>Valor padrão da sessão (R$)</label><input name="valor_sessao" type="number" step="0.01"></div>
+          <div class="tc-field"><label>Duração padrão (min)</label><input name="duracao_sessao_min" type="number"></div>
+        </div>
+        <div style="text-align:right"><button type="submit" class="btn btn-primary">Salvar</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="tc-tab-content" data-content="whats">
+    <div class="panel">
+      <h3>Modelos de mensagens automáticas</h3>
+      <p style="color:var(--cinza-700)">Use variáveis: <code>{NOME}</code>, <code>{PRIMEIRO_NOME}</code>, <code>{HORA}</code>, <code>{DATA}</code></p>
+      <form id="formMsgs" class="tc-form">
+        <div class="tc-field">
+          <label>Boas-vindas (botão WhatsApp do site)</label>
+          <textarea name="mensagem_boas_vindas" rows="3"></textarea>
+        </div>
+        <div class="tc-field">
+          <label>Após anamnese (enviado ao paciente)</label>
+          <textarea name="mensagem_pos_anamnese" rows="3"></textarea>
+        </div>
+        <div class="tc-field">
+          <label>Lembrete de sessão</label>
+          <textarea name="mensagem_lembrete" rows="3"></textarea>
+        </div>
+        <div style="text-align:right"><button type="submit" class="btn btn-primary">Salvar Modelos</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="tc-tab-content" data-content="conta">
+    <div class="panel">
+      <h3>Alterar senha</h3>
+      <form id="formSenha" class="tc-form" style="max-width:480px">
+        <div class="tc-field"><label>Nova senha</label><input type="password" id="senhaNova" minlength="6"></div>
+        <div class="tc-field"><label>Confirmar senha</label><input type="password" id="senhaConf" minlength="6"></div>
+        <div style="text-align:right"><button type="submit" class="btn btn-primary">Atualizar Senha</button></div>
+      </form>
+    </div>
+    <div class="panel">
+      <h3>Dados do banco</h3>
+      <p style="color:var(--cinza-700);font-size:0.92rem">
+        Para gerenciar usuários, fazer backup ou ver o banco completo, acesse o painel do Supabase em
+        <a href="https://supabase.com" target="_blank">supabase.com</a>.
+      </p>
+      <p style="font-size:0.88rem;color:var(--cinza-500)"><strong>URL atual:</strong> <code id="supaUrl"></code></p>
+    </div>
+  </div>
+</template>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/supabase-client.js"></script>
+<script src="../assets/js/ui.js"></script>
+<script src="shell.js"></script>
+<script src="configuracoes.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# Sistema
+.DS_Store
+Thumbs.db
+*.log
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Dependências (caso adicione)
+node_modules/
+
+# Variáveis sensíveis (config.js contém ANON_KEY que é pública, mas evite commitar projetos privados)
+# Descomente se quiser ocultar:
+# assets/js/config.js
+
+# Local Netlify folder
+.netlify

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anamnese Digital | Terapia Cristã</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="anamnese.css">
+<link rel="icon" href="../assets/img/logo.png">
+</head>
+<body class="anamnese-body">
+
+<!-- HEADER -->
+<header class="ana-header">
+  <a href="../index.html" class="logo">
+    <img src="../assets/img/logo.png" alt="Terapia Cristã" />
+  </a>
+  <div class="ana-save-status" id="saveStatus">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    <span>Salvo automaticamente</span>
+  </div>
+</header>
+
+<!-- PROGRESS -->
+<div class="ana-progress-wrap">
+  <div class="ana-progress-info">
+    <span id="stepLabel">Bem-vindo(a)</span>
+    <span id="stepPercent">0%</span>
+  </div>
+  <div class="ana-progress-bar">
+    <div class="ana-progress-fill" id="progressFill" style="width:0%"></div>
+  </div>
+  <div class="ana-step-dots" id="stepDots"></div>
+</div>
+
+<!-- WIZARD -->
+<main class="ana-wizard">
+
+<!-- WELCOME (step 0) -->
+<section class="ana-step active" data-step="0">
+  <div class="ana-welcome">
+    <div class="ana-welcome-icon">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+    </div>
+    <span class="ana-tag">Anamnese Digital</span>
+    <h1>Seja muito bem-vindo(a)</h1>
+    <p class="ana-welcome-lead">Este é o primeiro passo da sua jornada. Reserve cerca de <strong>15-20 minutos</strong> em um lugar tranquilo. Suas respostas são salvas automaticamente — você pode pausar e continuar quando quiser, em qualquer dispositivo.</p>
+
+    <div class="ana-welcome-features">
+      <div class="ana-wf">
+        <div class="ana-wf-icon">🔒</div>
+        <div><h4>Sigilo absoluto</h4><p>Apenas o terapeuta acessa suas respostas.</p></div>
+      </div>
+      <div class="ana-wf">
+        <div class="ana-wf-icon">💾</div>
+        <div><h4>Salvamento na nuvem</h4><p>Continue de onde parou em qualquer dispositivo.</p></div>
+      </div>
+      <div class="ana-wf">
+        <div class="ana-wf-icon">🕊️</div>
+        <div><h4>Espaço seguro</h4><p>Sem julgamento. Sem cobrança. Só escuta.</p></div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-lg" data-next>
+      Começar Anamnese
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <p class="ana-resume-hint" id="resumeHint" style="display:none">
+      <strong>Bom te ver de volta!</strong> Você havia parado na etapa <span id="resumeStep"></span>.
+      <a href="#" id="resumeLink">Continuar de onde parei →</a>
+    </p>
+  </div>
+</section>
+
+<!-- ETAPA 1: Dados Pessoais -->
+<section class="ana-step" data-step="1">
+  <div class="ana-step-head">
+    <span class="ana-step-num">01</span>
+    <div>
+      <h2>Seus dados pessoais</h2>
+      <p>Vamos começar com algumas informações básicas para te conhecer.</p>
+    </div>
+  </div>
+
+  <div class="ana-grid-2">
+    <div class="ana-field ana-field-full">
+      <label>Nome completo <span class="req">*</span></label>
+      <input type="text" name="nome" data-required placeholder="Seu nome completo">
+    </div>
+    <div class="ana-field">
+      <label>CPF</label>
+      <input type="text" name="cpf" placeholder="000.000.000-00" maxlength="14" data-mask="cpf">
+    </div>
+    <div class="ana-field">
+      <label>Data de Nascimento <span class="req">*</span></label>
+      <input type="date" name="data_nascimento" data-required>
+    </div>
+    <div class="ana-field">
+      <label>Telefone <span class="req">*</span></label>
+      <input type="tel" name="telefone" data-required placeholder="(00) 00000-0000" data-mask="phone">
+    </div>
+    <div class="ana-field">
+      <label>E-mail <span class="req">*</span></label>
+      <input type="email" name="email" data-required placeholder="seuemail@exemplo.com">
+    </div>
+    <div class="ana-field">
+      <label>Estado Civil</label>
+      <select name="estado_civil">
+        <option value="">Selecione</option>
+        <option>Solteiro(a)</option>
+        <option>Casado(a)</option>
+        <option>União Estável</option>
+        <option>Divorciado(a)</option>
+        <option>Viúvo(a)</option>
+        <option>Outro</option>
+      </select>
+    </div>
+    <div class="ana-field">
+      <label>Escolaridade</label>
+      <select name="escolaridade">
+        <option value="">Selecione</option>
+        <option>Ensino Fundamental</option>
+        <option>Ensino Médio</option>
+        <option>Técnico</option>
+        <option>Superior cursando</option>
+        <option>Superior completo</option>
+        <option>Pós-graduação</option>
+        <option>Mestrado/Doutorado</option>
+      </select>
+    </div>
+    <div class="ana-field">
+      <label>Ocupação / Profissão</label>
+      <input type="text" name="ocupacao" placeholder="O que você faz hoje">
+    </div>
+    <div class="ana-field">
+      <label>Religião / Espiritualidade</label>
+      <input type="text" name="religiao" placeholder="Como você se identifica">
+    </div>
+    <div class="ana-field">
+      <label>Com quem você reside</label>
+      <input type="text" name="reside" placeholder="Ex.: cônjuge, filhos, pais...">
+    </div>
+    <div class="ana-field ana-field-full">
+      <label>Endereço</label>
+      <input type="text" name="endereco" placeholder="Cidade / Estado (ou completo)">
+    </div>
+    <div class="ana-field ana-field-full">
+      <label>Como conheceu a Terapia Cristã?</label>
+      <select name="origem">
+        <option value="">Selecione</option>
+        <option>Instagram</option>
+        <option>WhatsApp</option>
+        <option>Indicação</option>
+        <option>Igreja</option>
+        <option>Empresa/Convênio</option>
+        <option>Escola</option>
+        <option>Hospital</option>
+        <option>Google</option>
+        <option>Outro</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="ana-nav">
+    <button class="btn ana-btn-back" data-prev>← Voltar</button>
+    <button class="btn btn-primary ana-btn-next" data-next>Próximo →</button>
+  </div>
+</section>
+
+<!-- ETAPA 2: Queixas e Objetivos -->
+<section class="ana-step" data-step="2">
+  <div class="ana-step-head">
+    <span class="ana-step-num">02</span>
+    <div>
+      <h2>Suas queixas e objetivos</h2>
+      <p>Compartilhe o que te trouxe até aqui. Não há resposta certa ou errada.</p>
+    </div>
+  </div>
+
+  <div class="ana-field">
+    <label>O que te motivou a procurar atendimento? <span class="req">*</span></label>
+    <textarea name="motivos" rows="5" data-required placeholder="Sinta-se à vontade para se expressar..."></textarea>
+    <span class="ana-field-hint">Essa é a primeira vez ou já fez terapia antes? Como foi essa experiência?</span>
+  </div>
+
+  <div class="ana-field">
+    <label>Quais objetivos você gostaria de alcançar?</label>
+    <textarea name="objetivos" rows="4" placeholder="O que você espera transformar, melhorar ou compreender..."></textarea>
+  </div>
+
+  <div class="ana-nav">
+    <button class="btn ana-btn-back" data-prev>← Voltar</button>
+    <button class="btn btn-primary ana-btn-next" data-next>Próximo →</button>
+  </div>
+</section>
+
+<!-- ETAPA 3: Sobre você -->
+<section class="ana-step" data-step="3">
+  <div class="ana-step-head">
+    <span class="ana-step-num">03</span>
+    <div>
+      <h2>Como você está hoje</h2>
+      <p>Vamos compreender como essas questões aparecem na sua vida atual.</p>
+    </div>
+  </div>
+
+  <div class="ana-field">
+    <label>Quando essas dificuldades começaram?</label>
+    <textarea name="quando_comecou" rows="3" placeholder="Quando notou pela primeira vez..."></textarea>
+  </div>
+
+  <div class="ana-field">
+    <label>Que fatores podem estar contribuindo?</label>
+    <textarea name="fatores_contribuintes" rows="3" placeholder="Pessoas, situações, mudanças..."></textarea>
+  </div>
+
+  <div class="ana-field">
+    <label>Qual dificuldade mais te incomoda?</label>
+    <textarea name="maior_incomodo" rows="3"></textarea>
+  </div>
+
+  <div class="ana-field">
+    <label>Assinale os sintomas que se aplicam a você:</label>
+    <div class="ana-chips" id="sintomas"></div>
+  </div>
+
+  <div class="ana-field">
+    <label>Marque os sentimentos com <strong>R</strong> (recorrente) ou <strong>M</strong> (já senti):</label>
+    <div class="ana-chips ana-chips-rm" id="sentimentos"></div>
+  </div>
+
+  <div class="ana-field">
+    <label>Hobbies, interesses, atividades que te dão prazer:</label>
+    <textarea name="hobbies" rows="3"></textarea>
+  </div>
+
+  <div class="ana-nav">
+    <button class="btn ana-btn-back" data-prev>← Voltar</button>
+    <button class="btn btn-primary ana-btn-next" data-next>Próximo →</button>
+  </div>
+</section>
+
+<!-- ETAPA 4: Saúde -->
+<section class="ana-step" data-step="4">
+  <div class="ana-step-head">
+    <span class="ana-step-num">04</span>
+    <div>
+      <h2>Sua saúde</h2>
+      <p>Informações sobre saúde física, medicações e tratamentos.</p>
+    </div>
+  </div>
+
+  <div class="ana-grid-2">
+    <div class="ana-field">
+      <label>Como avalia sua saúde física?</label>
+      <select name="saude_fisica">
+        <option value="">Selecione</option>
+        <option>Excelente</option><option>Boa</option><option>Regular</option>
+        <option>Ruim</option><option>Muito ruim</option>
+      </select>
+    </div>
+    <div class="ana-field">
+      <label>Qualidade do sono</label>
+      <select name="sono">
+        <option value="">Selecione</option>
+        <option>Excelente</option><option>Bom</option><option>Regular</option>
+        <option>Ruim</option><option>Insônia frequente</option>
+      </select>
+    </div>
+    <div class="ana-field ana-field-full">
+      <label>Faz uso de algum medicamento? Quais?</label>
+      <textarea name="medicamentos" rows="3" placeholder="Liste medicações, doses e tempo de uso"></textarea>
+    </div>
+    <div class="ana-field ana-field-full">
+      <label>Tem alguma doença ou condição crônica?</label>
+      <textarea name="doencas" rows="3"></textarea>
+    </div>
+    <div class="ana-field ana-field-full">
+      <label>Já fez ou faz acompanhamento médico/psiquiátrico?</label>
+      <textarea name="acompanhamento" rows="3"></textarea>
+    </div>
+  </div>
+
+  <div class="ana-nav">
+    <button class="btn ana-btn-back" data-prev>← Voltar</button>
+    <button class="btn btn-primary ana-btn-next" data-next>Próximo →</button>
+  </div>
+</section>
+
+<!-- ETAPA 5: Família -->
+<section class="ana-step" data-step="5">
+  <div class="ana-step-head">
+    <span class="ana-step-num">05</span>
+    <div>
+      <h2>História familiar</h2>
+      <p>Conte sobre suas relações familiares — passadas e presentes.</p>
+    </div>
+  </div>
+
+  <div class="ana-field">
+    <label>Como descreve sua relação com seus pais (ou cuidadores)?</label>
+    <textarea name="relacao_pais" rows="4"></textarea>
+  </div>
+  <div class="ana-field">
+    <label>Você tem irmãos? Como é a relação?</label>
+    <textarea name="irmaos" rows="3"></textarea>
+  </div>
+  <div class="ana-field">
+    <label>Tem filhos? Como é a relação com eles?</label>
+    <textarea name="filhos" rows="3"></textarea>
+  </div>
+  <div class="ana-field">
+    <label>Há histórico familiar de questões emocionais ou psiquiátricas?</label>
+    <textarea name="historico_familiar" rows="3"></textarea>
+  </div>
+
+  <div class="ana-nav">
+    <button class="btn ana-btn-back" data-prev>← Voltar</button>
+    <button class="btn btn-primary ana-btn-next" data-next>Próximo →</button>
+  </div>
+</section>
+
+<!-- ETAPA 6: Relacionamentos -->
+<section class="ana-step" data-step="6">
+  <div class="ana-step-head">
+    <span class="ana-step-num">06</span>
+    <div>
+      <h2>Relacionamentos</h2>
+      <p>Vida afetiva, amizades e vínculos importantes.</p>
+    </div>
+  </div>
+
+  <div class="ana-field">
+    <label>Como está sua vida afetiva atualmente?</label>
+    <textarea name="vida_afetiva" rows="4"></textarea>
+  </div>
+  <div class="ana-field">
+    <label>Como descreve suas amizades?</label>
+    <textarea name="amizades" rows="3"></textarea>
+  </div>
+  <div class="ana-field">
+    <label>Há alguém com quem se sente totalmente à vontade?</label>
+    <textarea name="confidente" rows="3"></textarea>
+  </div>
+
+  <div class="ana-nav">
+    <button class="btn ana-btn-back" data-prev>← Voltar</button>
+    <button class="btn btn-primary ana-btn-next" data-next>Próximo →</button>
+  </div>
+</section>
+
+<!-- ETAPA 7: Trabalho e estudos -->
+<section class="ana-step" data-step="7">
+  <div class="ana-step-head">
+    <span class="ana-step-num">07</span>
+    <div>
+      <h2>Trabalho e estudos</h2>
+      <p>Sua relação com sua ocupação atual.</p>
+    </div>
+  </div>
+
+  <div class="ana-field">
+    <label>Como se sente em relação ao seu trabalho/estudo?</label>
+    <textarea name="trabalho_sentimentos" rows="4"></textarea>
+  </div>
+  <div class="ana-field">
+    <label>Há sobrecarga, conflitos ou insatisfação?</label>
+    <textarea name="trabalho_problemas" rows="3"></textarea>
+  </div>
+  <div class="ana-field">
+    <label>Tem metas profissionais ou de estudo? Quais?</label>
+    <textarea name="metas" rows="3"></textarea>
+  </div>
+
+  <div class="ana-nav">
+    <button class="btn ana-btn-back" data-prev>← Voltar</button>
+    <button class="btn btn-primary ana-btn-next" data-next>Próximo →</button>
+  </div>
+</section>
+
+<!-- ETAPA 8: Espiritualidade -->
+<section class="ana-step" data-step="8">
+  <div class="ana-step-head">
+    <span class="ana-step-num">08</span>
+    <div>
+      <h2>Espiritualidade e fé</h2>
+      <p>Aqui você pode falar livremente sobre sua jornada espiritual.</p>
+    </div>
+  </div>
+
+  <div class="ana-field">
+    <label>Qual o papel da fé/espiritualidade na sua vida hoje?</label>
+    <textarea name="papel_fe" rows="4"></textarea>
+  </div>
+  <div class="ana-field">
+    <label>Sua fé tem te ajudado ou também tem te machucado?</label>
+    <textarea name="fe_impacto" rows="4" placeholder="Sem julgamento — sentimentos contraditórios são normais."></textarea>
+  </div>
+  <div class="ana-field">
+    <label>Há temas espirituais que você gostaria de abordar na terapia?</label>
+    <textarea name="temas_espirituais" rows="3"></textarea>
+  </div>
+
+  <div class="ana-nav">
+    <button class="btn ana-btn-back" data-prev>← Voltar</button>
+    <button class="btn btn-primary ana-btn-next" data-next>Próximo →</button>
+  </div>
+</section>
+
+<!-- ETAPA 9: Finalização -->
+<section class="ana-step" data-step="9">
+  <div class="ana-step-head">
+    <span class="ana-step-num">09</span>
+    <div>
+      <h2>Para fechar</h2>
+      <p>Últimas perguntas antes de enviar.</p>
+    </div>
+  </div>
+
+  <div class="ana-field">
+    <label>Há algo mais que você gostaria que o terapeuta soubesse?</label>
+    <textarea name="observacoes" rows="5" placeholder="Espaço livre para qualquer coisa relevante"></textarea>
+  </div>
+
+  <div class="ana-grid-2">
+    <div class="ana-field">
+      <label>Modalidade preferida</label>
+      <select name="modalidade_pref">
+        <option value="">Sem preferência</option>
+        <option>Presencial</option>
+        <option>Online</option>
+        <option>Tanto faz</option>
+      </select>
+    </div>
+    <div class="ana-field">
+      <label>Melhor horário</label>
+      <select name="horario_pref">
+        <option value="">Sem preferência</option>
+        <option>Manhã (8h-12h)</option>
+        <option>Tarde (12h-18h)</option>
+        <option>Noite (18h-21h)</option>
+        <option>Sábado pela manhã</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="ana-field" style="background:var(--verde-50);padding:18px;border-radius:var(--r-md);border:1px solid rgba(82,183,136,0.25)">
+    <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
+      <input type="checkbox" name="aceite_termo" data-required style="margin-top:4px;width:auto">
+      <span style="font-weight:500;color:var(--cinza-700);font-size:0.94rem">
+        Confirmo que as informações são verdadeiras e autorizo o terapeuta a usá-las exclusivamente para meu atendimento, mantendo sigilo profissional total. <span class="req">*</span>
+      </span>
+    </label>
+  </div>
+
+  <div class="ana-nav">
+    <button class="btn ana-btn-back" data-prev>← Voltar</button>
+    <button class="btn ana-btn-finalizar" id="btnFinalizar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>
+      Finalizar Anamnese
+    </button>
+  </div>
+</section>
+
+<!-- SUCCESS (step 10) -->
+<section class="ana-step" data-step="10">
+  <div class="ana-success">
+    <div class="ana-success-icon">
+      <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h1>Anamnese enviada com sucesso! 🙏</h1>
+    <p class="ana-success-lead">
+      Recebemos suas respostas com todo cuidado. <strong>Em até 24 horas</strong> entraremos em contato pelo WhatsApp para combinarmos sua primeira sessão.
+    </p>
+
+    <div class="ana-success-info">
+      <h4>📋 Protocolo de Atendimento</h4>
+      <p id="protocoloTexto">Aguarde alguns segundos...</p>
+    </div>
+
+    <div class="ana-success-actions">
+      <button class="btn btn-whatsapp btn-lg" id="successWhats">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg>
+        Avisar pelo WhatsApp
+      </button>
+      <a href="../index.html" class="btn btn-secondary btn-lg">Voltar à página inicial</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/supabase-client.js"></script>
+<script src="../assets/js/ui.js"></script>
+<script src="anamnese.js"></script>
+
+</body>
+</html>

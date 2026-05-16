@@ -1,0 +1,18 @@
+[build]
+  publish = "."
+
+# Configurações de redirecionamento para garantir que as rotas funcionem
+[[redirects]]
+  from = "/admin"
+  to = "/admin/dashboard.html"
+  status = 301
+
+[[redirects]]
+  from = "/login"
+  to = "/admin/login.html"
+  status = 301
+
+[[redirects]]
+  from = "/anamnese"
+  to = "/anamnese/index.html"
+  status = 301

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anamneses | Terapia Cristã</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="admin.css">
+<link rel="icon" href="../assets/img/logo.png">
+</head>
+<body class="admin-body">
+<template id="pageContent">
+  <div class="panel">
+    <div class="panel-head">
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+        <div class="tc-search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" id="buscar" placeholder="Buscar por nome, email ou telefone...">
+        </div>
+        <select id="filtroStatus" class="tc-search" style="max-width:180px;padding:8px 18px">
+          <option value="">Todos</option>
+          <option value="novo">Novos</option>
+          <option value="em_atendimento">Em atendimento</option>
+          <option value="concluido">Concluídos</option>
+          <option value="arquivado">Arquivados</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" id="btnSync">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+        Sincronizar como Pacientes
+      </button>
+    </div>
+
+    <table class="tc-table">
+      <thead><tr><th>Nome</th><th>Contato</th><th>Origem</th><th>Recebida em</th><th>Status</th><th></th></tr></thead>
+      <tbody id="tabela"><tr><td colspan="6" class="tc-table-empty">Carregando...</td></tr></tbody>
+    </table>
+  </div>
+</template>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/supabase-client.js"></script>
+<script src="../assets/js/ui.js"></script>
+<script src="shell.js"></script>
+<script src="prontuarios.js"></script>
+</body>
+</html>

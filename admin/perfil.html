@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Perfil | Terapia Cristã</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="admin.css">
+<link rel="icon" href="../assets/img/logo.png">
+</head>
+<body class="admin-body">
+
+<template id="pageContent">
+  <div class="panel">
+    <div class="panel-head">
+      <h3>👤 Editar Perfil</h3>
+      <p>Mantenha seus dados de acesso atualizados.</p>
+    </div>
+    
+    <form id="perfilForm" class="tc-form" style="max-width: 500px; margin-top: 20px;">
+      <div class="ana-field">
+        <label>Nome Completo</label>
+        <input type="text" id="perfNome" required>
+      </div>
+      
+      <div class="ana-field">
+        <label>E-mail de Acesso</label>
+        <input type="email" id="perfEmail" required>
+      </div>
+
+      <div class="ana-field">
+        <label>Nova Senha</label>
+        <input type="password" id="perfSenha" placeholder="Deixe em branco para não alterar">
+        <small style="color: #666; display: block; margin-top: 5px;">A senha será alterada apenas se você preencher este campo.</small>
+      </div>
+
+      <div class="ana-nav" style="margin-top: 30px;">
+        <button type="submit" class="btn btn-primary" id="btnSalvar">Salvar Alterações</button>
+      </div>
+    </form>
+  </div>
+</template>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/supabase-client.js"></script>
+<script src="../assets/js/ui.js"></script>
+<script src="shell.js"></script>
+<script>
+TC_UI.ready(async () => {
+  const session = await TC_AUTH.getSession();
+  if (!session) return;
+
+  // Se for primeiro acesso, mostra aviso
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('first')) {
+    TC_UI.toast('Por segurança, altere sua senha de primeiro acesso.', 'aviso', 6000);
+    document.getElementById('perfSenha').focus();
+    document.getElementById('perfSenha').required = true;
+  }
+
+  // Preencher campos
+  document.getElementById('perfNome').value = session.nome || '';
+  document.getElementById('perfEmail').value = session.email || '';
+
+  // Submit
+  document.getElementById('perfilForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('btnSalvar');
+    const nome = document.getElementById('perfNome').value.trim();
+    const email = document.getElementById('perfEmail').value.trim().toLowerCase();
+    const senha = document.getElementById('perfSenha').value;
+
+    btn.disabled = true;
+    btn.textContent = 'Salvando...';
+
+    try {
+      const patch = { nome, email };
+      if (senha) patch.senha = senha;
+      
+      await TC_DB.admin.update(session.id, patch);
+      
+      TC_UI.toast('Perfil atualizado com sucesso!', 'sucesso');
+      setTimeout(() => window.location.reload(), 1500);
+    } catch (err) {
+      console.error(err);
+      TC_UI.toast('Erro ao atualizar perfil.', 'erro');
+      btn.disabled = false;
+      btn.textContent = 'Salvar Alterações';
+    }
+  });
+});
+</script>
+</body>
+</html>

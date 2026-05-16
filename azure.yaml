@@ -1,0 +1,6 @@
+name: terapia-crista
+services:
+  web:
+    project: .
+    language: static
+    host: staticweb
