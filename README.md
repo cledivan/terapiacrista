@@ -84,6 +84,13 @@ git push -u origin main
 # - Deploy!
 ```
 
+> Para deploy automático via GitHub Actions, configure estes secrets no repositório:
+> - `SUPABASE_ACCESS_TOKEN`
+> - `SUPABASE_PROJECT_REF`
+> - `NETLIFY_AUTH_TOKEN`
+> - `NETLIFY_SITE_ID`
+
+
 **Seu site estará no ar em ~2 minutos!** 🎉
 
 ---

@@ -90,7 +90,15 @@ git remote add origin https://github.com/SEU_USUARIO/terapia-crista.git
 git push -u origin main
 ```
 
-2. **Conecte no Netlify**:
+2. **Adicione os secrets no GitHub Actions**:
+   - Vá em `Settings` → `Secrets and variables` → `Actions`
+   - Crie estes secrets:
+     - `SUPABASE_ACCESS_TOKEN`
+     - `SUPABASE_PROJECT_REF`
+     - `NETLIFY_AUTH_TOKEN`
+     - `NETLIFY_SITE_ID`
+
+3. **Conecte no Netlify** (uma vez apenas):
    - Acesse https://app.netlify.com
    - Clique em **Add new site → Import an existing project**
    - Selecione **GitHub** como provedor
@@ -100,7 +108,13 @@ git push -u origin main
      - **Publish directory**: `.` (raiz do projeto)
    - Clique em **Deploy site**
 
-3. **Aguarde o deployment completar** (~1-2 minutos)
+4. **Aguarde o deployment completar** (~1-2 minutos)
+
+5. **A cada novo push em `main`**:
+   - O GitHub Actions vai atualizar o schema do Supabase
+   - E também vai fazer deploy no Netlify automaticamente
+
+> O workflow está em `.github/workflows/supabase-sync.yml`.
 
 ---
 

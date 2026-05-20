@@ -17,7 +17,7 @@ jobs:
           node-version: '20'
 
       - name: Install Supabase CLI
-        run: npm install -g supabase
+        run: npm install -g supabase netlify-cli
 
       - name: Authenticate Supabase CLI
         run: supabase login --token "${{ secrets.SUPABASE_ACCESS_TOKEN }}"
@@ -27,3 +27,9 @@ jobs:
 
       - name: Apply Supabase schema
         run: supabase db query --linked --file supabase/schema.sql
+
+      - name: Deploy to Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: |
+          netlify deploy --prod --dir=. --site="${{ secrets.NETLIFY_SITE_ID }}"
