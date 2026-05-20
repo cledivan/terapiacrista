@@ -1,0 +1,29 @@
+name: Deploy static site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare deploy package
+        run: |
+          mkdir -p deploy
+          cp -R index.html admin anamnese assets deploy/
+          touch deploy/.nojekyll
+
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v1
+        with:
+          path: deploy
+      - uses: actions/deploy-pages@v1

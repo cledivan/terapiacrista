@@ -254,7 +254,18 @@ async function finalizarAnamnese() {
     console.error('Erro ao enviar:', e);
     btn.disabled = false;
     btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg> Finalizar Anamnese';
-    TC_UI.toast('Erro ao enviar. Verifique sua conexão e tente novamente.', 'erro', 6000);
+    let erroMsg = 'Erro ao enviar. Verifique sua conexão e tente novamente.';
+    if (e?.message) {
+      const msg = e.message;
+      if (/relation .*prontuarios.*does not exist/i.test(msg)) {
+        erroMsg = 'Erro de configuração do Supabase: tabela "prontuarios" não encontrada. Aplique o schema no projeto Supabase.';
+      } else if (/network|timeout|failed to fetch/i.test(msg)) {
+        erroMsg = 'Não foi possível conectar ao Supabase. Verifique sua conexão e as credenciais do projeto.';
+      } else {
+        erroMsg = `Erro ao enviar: ${msg}`;
+      }
+    }
+    TC_UI.toast(erroMsg, 'erro', 9000);
     document.getElementById('saveStatus')?.classList.add('error');
   }
 }
