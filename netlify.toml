@@ -1,4 +1,5 @@
 [build]
+  command = "npm run build"
   publish = "."
 
 # Configurações de redirecionamento para garantir que as rotas funcionem

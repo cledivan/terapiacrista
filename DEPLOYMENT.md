@@ -97,6 +97,8 @@ git push -u origin main
      - `SUPABASE_PROJECT_REF`
      - `NETLIFY_AUTH_TOKEN`
      - `NETLIFY_SITE_ID`
+         - `SUPABASE_URL`
+         - `SUPABASE_ANON_KEY`
 
 3. **Conecte no Netlify** (uma vez apenas):
    - Acesse https://app.netlify.com
@@ -104,7 +106,7 @@ git push -u origin main
    - Selecione **GitHub** como provedor
    - Autorize e selecione o repositório `terapia-crista`
    - Configure:
-     - **Build command**: (deixe em branco - não há build)
+   - **Build command**: `npm run build`
      - **Publish directory**: `.` (raiz do projeto)
    - Clique em **Deploy site**
 

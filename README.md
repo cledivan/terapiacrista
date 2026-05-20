@@ -89,6 +89,8 @@ git push -u origin main
 > - `SUPABASE_PROJECT_REF`
 > - `NETLIFY_AUTH_TOKEN`
 > - `NETLIFY_SITE_ID`
+> - `SUPABASE_URL`
+> - `SUPABASE_ANON_KEY`
 
 
 **Seu site estará no ar em ~2 minutos!** 🎉
