@@ -1,0 +1,29 @@
+name: Sync Supabase schema from GitHub
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  supabase-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+
+      - name: Install Supabase CLI
+        run: npm install -g supabase
+
+      - name: Authenticate Supabase CLI
+        run: supabase login --token "${{ secrets.SUPABASE_ACCESS_TOKEN }}"
+
+      - name: Link Supabase project
+        run: supabase link --project-ref "${{ secrets.SUPABASE_PROJECT_REF }}"
+
+      - name: Apply Supabase schema
+        run: supabase db query --linked --file supabase/schema.sql
