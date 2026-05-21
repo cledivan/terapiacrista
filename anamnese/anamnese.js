@@ -257,8 +257,9 @@ async function finalizarAnamnese() {
     let erroMsg = 'Erro ao enviar. Verifique sua conexão e tente novamente.';
     if (e?.message) {
       const msg = e.message;
-      if (/relation .*prontuarios.*does not exist/i.test(msg)) {
-        erroMsg = 'Erro de configuração do Supabase: tabela "prontuarios" não encontrada. Aplique o schema no projeto Supabase.';
+      if (/relation .*prontuarios.*does not exist/i.test(msg)
+        || /Could not find the table 'public\.prontuarios' in the schema cache/i.test(msg)) {
+        erroMsg = 'Erro de configuração do Supabase: tabela "prontuarios" não encontrada ou não aplicada no projeto Supabase. Execute o SQL em supabase/schema.sql no painel do Supabase.';
       } else if (/network|timeout|failed to fetch/i.test(msg)) {
         erroMsg = 'Não foi possível conectar ao Supabase. Verifique sua conexão e as credenciais do projeto.';
       } else {
